@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ===== PROFIL =====
+model Profile {
+  id          Int      @id @default(autoincrement())
+  name        String
+  title       String
+  subtitle    String?
+  bio         String
+  email       String
+  phone       String?
+  location    String?
+  avatarUrl   String?
+  githubUrl   String?
+  linkedinUrl String?
+  instagramUrl String?
+  cvUrl       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== COMPÉTENCES =====
+model Skill {
+  id          Int      @id @default(autoincrement())
+  name        String
+  percentage  Int      // 0-100
+  category    String   // "frontend", "backend", "tools", "soft"
+  icon        String?  // Nom de l'icône ou URL
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== EXPÉRIENCES =====
+model Experience {
+  id          Int      @id @default(autoincrement())
+  title       String
+  company     String
+  location    String?
+  type        String   // "stage", "alternance", "cdi", "cdd"
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String
+  technologies String? // JSON array as string
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== FORMATIONS =====
+model Education {
+  id          Int      @id @default(autoincrement())
+  degree      String
+  school      String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String
+  logoUrl     String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== PROJETS =====
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String
+  longDescription String?
+  imageUrl    String?
+  githubUrl   String?
+  liveUrl     String?
+  technologies String  // JSON array as string
+  category    String   // "web", "mobile", "desktop", "other"
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== TÉMOIGNAGES =====
+model Testimonial {
+  id          Int      @id @default(autoincrement())
+  name        String
+  role        String
+  company     String?
+  content     String
+  avatarUrl   String?
+  rating      Int?     // 1-5
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ===== MESSAGES DE CONTACT =====
+model ContactMessage {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String
+  subject     String?
+  message     String
+  read        Boolean  @default(false)
+  replied     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+// ===== PARAMÈTRES DU SITE =====
+model SiteSetting {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique
+  value       String
+  type        String   @default("string") // "string", "number", "boolean", "json"
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

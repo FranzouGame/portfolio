@@ -1,0 +1,95 @@
+# ================================
+# Dependencies
+# ================================
+node_modules
+.pnpm-store
+package-lock.json
+
+# ================================
+# Nuxt build outputs
+# ================================
+.nuxt
+.output
+.data
+.nitro
+.cache
+dist
+
+# ================================
+# Environment files
+# ================================
+.env
+.env.local
+.env.*.local
+.env.production
+!.env.example
+
+# ================================
+# Database
+# ================================
+*.db
+*.db-journal
+prisma/*.db
+prisma/*.db-journal
+data/
+
+# ================================
+# Logs
+# ================================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ================================
+# IDE / Editor
+# ================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# ================================
+# OS files
+# ================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ================================
+# Testing
+# ================================
+coverage
+.nyc_output
+
+# ================================
+# Misc
+# ================================
+*.local
+.fleet
+.history
+.temp
+tmp/
+
+# ================================
+# TypeScript
+# ================================
+*.tsbuildinfo
+
+# ================================
+# Archive files (si tu zip en local)
+# ================================
+*.zip
+*.tar.gz
+*.rar

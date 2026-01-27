@@ -1,0 +1,20 @@
+version: '3.8'
+
+# Version simplifiée - juste l'app sur le port 3000
+# Utilise Nginx sur l'hôte pour le reverse proxy
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-barlic
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/prisma/dev.db
+    volumes:
+      # Persister la base de données SQLite
+      - ./data:/app/prisma
