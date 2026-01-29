@@ -26,7 +26,7 @@ const scrollToContact = () => {
   <ClientOnly>
     <LazyThreeParticleField />
   </ClientOnly>
-  
+
     <!-- Gradient Overlays -->
     <div 
       class="absolute inset-0 bg-gradient-to-b from-dark-950/50 via-transparent to-dark-950 
@@ -44,7 +44,7 @@ const scrollToContact = () => {
         v-motion
         :initial="{ opacity: 0, y: 20 }"
         :visible-once="{ opacity: 1, y: 0, transition: { delay: 200 } }"
-        class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full 
+        class="inline-flex items-center gap-2 px-4 py-2 mb-4 mt-12 rounded-full 
                bg-white/5 border border-white/10 backdrop-blur-sm"
       >
         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
