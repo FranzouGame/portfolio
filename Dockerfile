@@ -4,12 +4,13 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 
-# Copier les fichiers de dépendances
+RUN apk add --no-cache openssl
+
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma/
 
-# Installer les dépendances
-RUN npm ci
+RUN npm install
+RUN npx prisma generate
 
 # ================================
 # Stage 2: Builder
@@ -17,14 +18,16 @@ RUN npm ci
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copier les dépendances du stage précédent
+RUN apk add --no-cache openssl
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Générer le client Prisma
-RUN npx prisma generate
+# Créer et seeder la DB pendant le build
+RUN npx prisma db push
+RUN npx tsx prisma/seed.ts
 
-# Builder l'application Nuxt
+# Builder Nuxt
 RUN npm run build
 
 # ================================
@@ -33,30 +36,29 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Créer un utilisateur non-root pour la sécurité
+RUN apk add --no-cache openssl
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nuxtjs
 
-# Copier les fichiers nécessaires
+# Copier l'app buildée
 COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/package.json ./package.json
 
-# Créer le dossier pour la DB SQLite et donner les permissions
-RUN mkdir -p /app/prisma && chown -R nuxtjs:nodejs /app
+# Copier la DB déjà seedée
+COPY --from=builder /app/prisma/dev.db ./prisma/dev.db
 
-# Variables d'environnement
+RUN chown -R nuxtjs:nodejs /app
+
 ENV NODE_ENV=production
 ENV DATABASE_URL="file:/app/prisma/dev.db"
 ENV HOST=0.0.0.0
 ENV PORT=3000
 
-# Changer vers l'utilisateur non-root
 USER nuxtjs
 
-# Exposer le port
 EXPOSE 3000
 
-# Script de démarrage
-CMD ["sh", "-c", "npx prisma db push && npx prisma db seed && node .output/server/index.mjs"]
+# Juste lancer l'app - la DB est déjà prête
+CMD ["node", ".output/server/index.mjs"]
