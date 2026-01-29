@@ -100,7 +100,7 @@ onMounted(() => {
             v-motion
             :initial="{ opacity: 0, x: -20 }"
             :visible-once="{ opacity: 1, x: 0, transition: { delay: 100 * index } }"
-            class="glass-card p-6 group border-animated"
+            class="glass-card p-6 group hover:border-neon-cyan/30 transition-all duration-300"
           >
             <div class="flex justify-between items-center mb-3">
               <span class="font-display font-semibold text-lg">{{ skill.name }}</span>

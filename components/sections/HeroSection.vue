@@ -23,10 +23,10 @@ const scrollToContact = () => {
     class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
     <!-- 3D Background -->
-    <ClientOnly>
-      <Lazy3dParticleField />
-    </ClientOnly>
-
+  <ClientOnly>
+    <LazyThreeParticleField />
+  </ClientOnly>
+  
     <!-- Gradient Overlays -->
     <div 
       class="absolute inset-0 bg-gradient-to-b from-dark-950/50 via-transparent to-dark-950 
