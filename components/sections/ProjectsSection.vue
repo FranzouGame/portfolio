@@ -92,8 +92,9 @@ const getSlideStyle = (index: number): Record<string, string> => {
     opacity: isActive ? '1' : isAdjacent ? '0.6' : '0.3',
     transform: `translateX(${diff * 85}%) scale(${isActive ? 1 : isAdjacent ? 0.85 : 0.7})`,
     zIndex: isActive ? '30' : isAdjacent ? '20' : '10',
-    pointerEvents: isActive ? 'auto' : 'none',
-    filter: isActive ? 'none' : 'brightness(0.7)'
+    pointerEvents: isActive || isAdjacent ? 'auto' : 'none',
+    filter: isActive ? 'none' : 'brightness(0.7)',
+    cursor: isActive ? 'default' : 'pointer'
   }
 }
 
@@ -215,7 +216,7 @@ onUnmounted(() => {
         <div ref="carouselRef" class="relative h-[500px] md:h-[550px] flex items-center justify-center overflow-hidden">
           <div v-for="(project, index) in filteredProjects" :key="project.id"
             class="absolute w-full max-w-xs sm:max-w-sm md:max-w-lg transition-all duration-500 ease-out"
-            :style="getSlideStyle(index)">
+            :style="getSlideStyle(index)" @click="index !== currentIndex && goToSlide(index)">
             <article class="glass-card overflow-hidden group h-full">
               <!-- Image - Clickable -->
 
