@@ -107,22 +107,6 @@ const scrollToContact = () => {
           Me contacter
         </button>
       </div>
-
-      <!-- Tech Stack Icons -->
-      <div
-        v-motion
-        :initial="{ opacity: 0 }"
-        :visible-once="{ opacity: 1, transition: { delay: 1200 } }"
-        class="mt-16 flex items-center justify-center gap-8 opacity-40"
-      >
-        <div 
-          v-for="tech in ['Nuxt', 'Vue', 'Django', 'TypeScript', 'Python']"
-          :key="tech"
-          class="font-mono text-xs tracking-wider uppercase"
-        >
-          {{ tech }}
-        </div>
-      </div>
     </div>
 
 
