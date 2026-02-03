@@ -163,6 +163,7 @@ async function main() {
       description: 'Application de ticketing pour la gestion des réparations de machines.',
       longDescription: `Conception et développement d'une application de ticketing pour la gestion des réparations de machines du département GIM de l'IUT, dans le cadre de ma formation. Cette application permet de suivre l'état des machines et de gérer les demandes de maintenance.`,
       imageUrl: '/images/projects/gmao.png',
+      githubUrl: 'https://github.com/maximeBourciez/GIMAO',
       technologies: JSON.stringify(['Python', 'Django', 'Vue.js', 'JavaScript', "HTML", "CSS"]),
       category: 'web',
       featured: true,
