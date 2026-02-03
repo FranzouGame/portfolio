@@ -170,6 +170,7 @@ const socialLinks = computed(() => [
 
           <!-- Social Links -->
           <div>
+            <br class="mt-9"></br>
             <h4 class="font-mono text-sm text-white/40 uppercase tracking-wider mb-4">
               Réseaux sociaux
             </h4>

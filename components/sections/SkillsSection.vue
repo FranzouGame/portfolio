@@ -141,8 +141,7 @@ onMounted(() => {
           <div
             v-for="tech in ['Nuxt.js', 'Vue.js', 'TypeScript', 'Django', 'Python', 'TailwindCSS', 'PostgreSQL', 'Git']"
             :key="tech"
-            class="px-6 py-3 glass-card font-mono text-sm hover:border-neon-cyan/30 
-                   hover:shadow-[0_0_20px_rgba(0,245,255,0.1)] transition-all cursor-default"
+            class="px-6 py-3 glass-card font-mono text-sm"
           >
             {{ tech }}
           </div>
