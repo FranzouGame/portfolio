@@ -230,3 +230,369 @@
     cursor: none;
   }
 }
+
+/* ===== LIGHT MODE ===== */
+.light body {
+  background-color: #f8fafc;
+  background-image: 
+    radial-gradient(ellipse at top, rgba(0, 102, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(0, 245, 255, 0.05) 0%, transparent 50%);
+  color: #1e293b;
+}
+
+/* Text colors */
+.light .text-white {
+  color: #1e293b;
+}
+
+.light .text-white\/70 {
+  color: #475569;
+}
+
+.light .text-white\/60 {
+  color: #64748b;
+}
+
+.light .text-white\/50 {
+  color: #64748b;
+}
+
+.light .text-white\/40 {
+  color: #94a3b8;
+}
+
+.light .text-white\/30 {
+  color: #cbd5e1;
+}
+
+.light .text-white\/20 {
+  color: #e2e8f0;
+}
+
+/* Neon colors - plus visibles en light mode */
+.light .text-neon-cyan {
+  color: #0891b2;
+}
+
+.light .text-neon-blue {
+  color: #2563eb;
+}
+
+.light .text-neon-purple {
+  color: #9333ea;
+}
+
+/* Gradient text */
+.light .gradient-text {
+  background-image: linear-gradient(135deg, #0891b2 0%, #2563eb 50%, #9333ea 100%);
+}
+
+.light .gradient-text-animated {
+  background-image: linear-gradient(135deg, #0891b2 0%, #2563eb 25%, #9333ea 50%, #2563eb 75%, #0891b2 100%);
+}
+
+/* Glass cards */
+.light .glass-card,
+.light .glass-card-hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.light .glass-card-hover:hover {
+  border-color: rgba(8, 145, 178, 0.3);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(8, 145, 178, 0.1);
+}
+
+/* Backgrounds */
+.light .bg-dark-950 {
+  background-color: #f8fafc;
+}
+
+.light .bg-dark-950\/95 {
+  background-color: rgba(248, 250, 252, 0.95);
+}
+
+.light .bg-dark-950\/80 {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+.light .bg-dark-900 {
+  background-color: #f1f5f9;
+}
+
+.light .bg-dark-900\/40 {
+  background-color: rgba(241, 245, 249, 0.6);
+}
+
+.light .bg-dark-800 {
+  background-color: #e2e8f0;
+}
+
+.light .bg-white\/5 {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.light .bg-white\/10 {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light .bg-neon-cyan\/5 {
+  background-color: rgba(8, 145, 178, 0.08);
+}
+
+.light .bg-neon-cyan\/20 {
+  background-color: rgba(8, 145, 178, 0.15);
+}
+
+.light .bg-neon-purple\/5 {
+  background-color: rgba(147, 51, 234, 0.08);
+}
+
+.light .bg-neon-blue\/5 {
+  background-color: rgba(37, 99, 235, 0.08);
+}
+
+/* Borders */
+.light .border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light .border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.light .border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.light .border-neon-cyan\/20 {
+  border-color: rgba(8, 145, 178, 0.25);
+}
+
+.light .border-neon-cyan\/30 {
+  border-color: rgba(8, 145, 178, 0.35);
+}
+
+.light .border-neon-cyan\/50 {
+  border-color: rgba(8, 145, 178, 0.5);
+}
+
+.light .border-neon-purple\/20 {
+  border-color: rgba(147, 51, 234, 0.25);
+}
+
+/* Buttons */
+.light .btn-primary {
+  border-color: rgba(8, 145, 178, 0.5);
+  color: #0891b2;
+}
+
+.light .btn-primary:hover {
+  border-color: #0891b2;
+  box-shadow: 0 0 20px rgba(8, 145, 178, 0.25);
+}
+
+.light .btn-primary::before {
+  background-color: rgba(8, 145, 178, 0.1);
+}
+
+.light .btn-secondary {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #475569;
+}
+
+.light .btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #1e293b;
+}
+
+/* Navbar */
+.light nav.bg-dark-950\/95,
+.light .bg-dark-950\/98 {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+}
+
+.light .border-t.border-white\/10,
+.light .border-b.border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Footer */
+.light footer {
+  background-color: #f1f5f9;
+}
+
+.light .from-dark-950 {
+  --tw-gradient-from: #f8fafc;
+}
+
+.light .to-dark-950 {
+  --tw-gradient-to: #f8fafc;
+}
+
+.light .via-dark-900\/50 {
+  --tw-gradient-via: rgba(241, 245, 249, 0.5);
+}
+
+/* Gradients backgrounds */
+.light .bg-gradient-to-b.from-dark-950\/50 {
+  background-image: linear-gradient(to bottom, rgba(248, 250, 252, 0.5), transparent);
+}
+
+.light .bg-gradient-to-t.from-dark-950 {
+  background-image: linear-gradient(to top, #f8fafc, transparent);
+}
+
+.light .bg-gradient-to-br.from-dark-800 {
+  background-image: linear-gradient(to bottom right, #e2e8f0, #f1f5f9);
+}
+
+.light .bg-gradient-to-br.from-neon-cyan\/20 {
+  background-image: linear-gradient(to bottom right, rgba(8, 145, 178, 0.15), rgba(37, 99, 235, 0.15));
+}
+
+/* Project cards */
+.light .bg-gradient-to-br.from-dark-800.to-dark-900 {
+  background-image: linear-gradient(to bottom right, #ffffff, #f1f5f9);
+}
+
+/* Dot grid */
+.light .dot-grid {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+}
+
+/* Skill bar */
+.light .skill-bar {
+  background-color: #e2e8f0;
+}
+
+.light .skill-bar-fill {
+  background: linear-gradient(90deg, #0891b2, #2563eb);
+  box-shadow: 0 0 10px rgba(8, 145, 178, 0.4);
+}
+
+/* Scrollbar */
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0891b2, #2563eb);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0891b2, #9333ea);
+}
+
+/* Selection */
+.light ::selection {
+  background: rgba(8, 145, 178, 0.2);
+  color: #1e293b;
+}
+
+/* Blur backgrounds */
+.light .blur-3xl {
+  opacity: 0.5;
+}
+
+/* Input fields */
+.light input,
+.light textarea {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94a3b8;
+}
+
+.light input:focus,
+.light textarea:focus {
+  border-color: rgba(8, 145, 178, 0.5);
+}
+
+/* Code block in About */
+.light pre {
+  color: #475569;
+}
+
+/* Badges */
+.light .bg-green-500\/10 {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+.light .bg-green-500\/20 {
+  background-color: rgba(34, 197, 94, 0.2);
+}
+
+/* Opacity adjustments for blurred elements */
+.light .opacity-20,
+.light .opacity-30 {
+  opacity: 0.15;
+}
+
+/* Shadows for cards */
+.light [class*="shadow-[0_0_20px"] {
+  --tw-shadow: 0 0 15px rgba(8, 145, 178, 0.15);
+}
+
+/* Hover states */
+.light .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.light .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.light .hover\:bg-white\/20:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.light .hover\:bg-neon-cyan\/10:hover {
+  background-color: rgba(8, 145, 178, 0.12);
+}
+
+.light .hover\:border-neon-cyan\/30:hover {
+  border-color: rgba(8, 145, 178, 0.35);
+}
+
+.light .hover\:border-neon-cyan\/50:hover {
+  border-color: rgba(8, 145, 178, 0.5);
+}
+
+.light .hover\:border-white\/20:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.light .hover\:text-white:hover {
+  color: #1e293b;
+}
+
+.light .hover\:text-neon-cyan:hover {
+  color: #0891b2;
+}
+
+.light .group:hover .group-hover\:text-neon-cyan {
+  color: #0891b2;
+}
+
+/* Timeline line */
+.light .bg-gradient-to-b.from-neon-cyan.via-neon-blue.to-neon-purple {
+  background-image: linear-gradient(to bottom, #0891b2, #2563eb, #9333ea);
+}
+
+/* Logo FB */
+.light .text-dark-950 {
+  color: #0f172a;
+}
