@@ -11,148 +11,190 @@ const props = defineProps<{
 
 const highlights = [
   {
-    icon: '🎓',
+    marker: '01',
     label: 'Formation',
     value: 'BUT Informatique',
-    detail: 'IUT Bayonne'
+    detail: 'IUT de Bayonne',
   },
   {
-    icon: '💼',
+    marker: '02',
     label: 'Expérience',
-    value: 'Alternant',
-    detail: 'Optera'
+    value: 'Alternance',
+    detail: 'Optera',
   },
   {
-    icon: '📍',
-    label: 'Localisation',
+    marker: '03',
+    label: 'Territoire',
     value: 'Pays Basque',
-    detail: 'France'
+    detail: 'France',
   },
   {
-    icon: '🚗',
-    label: 'Mobilité',
-    value: 'Permis B',
-    detail: 'Véhiculé'
+    marker: '04',
+    label: 'Priorité',
+    value: 'Finition UI',
+    detail: 'clair, propre, durable',
   },
 ]
+
+const principles = [
+  {
+    label: 'Clarté',
+    description: 'Des interfaces lisibles, calmes et immédiatement compréhensibles.',
+  },
+  {
+    label: 'Rythme',
+    description: 'Des espacements précis, une hiérarchie nette et des transitions discrètes.',
+  },
+  {
+    label: 'Fiabilité',
+    description: 'Une implémentation maintenable, responsive et cohérente dans le détail.',
+  },
+]
+
+const stack = ['Nuxt.js', 'Vue', 'Django', 'TypeScript', 'TailwindCSS', 'Python']
 </script>
 
 <template>
-  <section id="about" class="relative py-32 overflow-hidden">
-    <!-- Background Elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-neon-cyan/5 rounded-full blur-3xl" />
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl" />
+  <section id="about" class="relative scroll-mt-28 py-24 sm:py-28">
+    <!-- Japanese decorative elements -->
+    <div class="pointer-events-none absolute inset-0 overflow-hidden">
+      <UiDecoTwig class="absolute -left-2 top-20 text-primary-400" />
+      <UiDecoAsanoha :size="60" class="absolute right-8 top-12 text-primary-300 opacity-50" />
+    </div>
 
-    <div class="max-w-7xl mx-auto px-6">
-      <!-- Section Header -->
-      <div v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{ opacity: 1, y: 0 }" class="text-center mb-20">
-        <span class="font-mono text-neon-cyan text-sm tracking-widest uppercase">
-          À propos
-        </span>
-        <h2 class="section-title mt-4">
-          Qui suis-je<span class="text-neon-cyan">?</span>
-        </h2>
-      </div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="section-shell px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1.06fr)_minmax(320px,0.94fr)] lg:items-start">
+          <div class="flex flex-col h-full">
+            <span
+              v-motion
+              :initial="{ opacity: 0, y: 16 }"
+              :visible-once="{ opacity: 1, y: 0 }"
+              class="font-mono text-sm uppercase tracking-[0.24em] text-primary-500 font-semibold"
+            >
+              Profil
+            </span>
 
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- Left: Image/Visual -->
-        <div v-motion :initial="{ opacity: 0, x: -50 }" :visible-once="{ opacity: 1, x: 0, transition: { delay: 200 } }"
-          class="relative">
-          <!-- Main Image Container -->
-          <div class="relative aspect-square max-w-md mx-auto">
-            <!-- Decorative Frame -->
-            <div class="absolute -inset-4 border border-neon-cyan/20 rounded-2xl 
-                     transform rotate-3" />
-            <div class="absolute -inset-4 border border-neon-purple/20 rounded-2xl 
-                     transform -rotate-3" />
+            <h2
+              v-motion
+              :initial="{ opacity: 0, y: 22 }"
+              :visible-once="{ opacity: 1, y: 0, transition: { delay: 120 } }"
+              class="mt-6 font-display text-4xl tracking-tight text-slate-800 sm:text-5xl max-w-3xl"
+            >
+              Une manière calme et précise de concevoir le web.
+            </h2>
 
-            <!-- Image Placeholder / Avatar -->
-            <div class="relative w-full h-full rounded-2xl overflow-hidden 
-                     bg-gradient-to-br from-dark-800 to-dark-900">
-              <!-- Placeholder with initials -->
-              <div class="absolute inset-0 flex items-center justify-center 
-                       text-8xl font-display font-bold gradient-text opacity-20">
-                FB
+            <p
+              v-motion
+              :initial="{ opacity: 0 }"
+              :visible-once="{ opacity: 1, transition: { delay: 220 } }"
+              class="mt-8 max-w-2xl text-lg leading-relaxed text-slate-600"
+            >
+              {{
+                profile?.bio ||
+                  "Étudiant en informatique et alternant chez Optera, je conçois des applications web modernes avec une attention particulière portée au rythme, à la lisibilité et à l'expérience d'usage."
+              }}
+            </p>
+
+            <div class="mt-10 grid gap-4 sm:grid-cols-2">
+              <div
+                v-for="(item, index) in highlights"
+                :key="item.label"
+                v-motion
+                :initial="{ opacity: 0, y: 16 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { delay: 280 + index * 80 } }"
+                class="rounded-2xl border border-slate-100 bg-white p-5 sm:p-6 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-soft"
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <span class="font-mono text-[11px] uppercase tracking-[0.28em] text-primary-500">
+                    {{ item.marker }}
+                  </span>
+                  <span class="h-px flex-1 bg-slate-100" />
+                </div>
+                <p class="mt-4 font-mono text-[11px] uppercase tracking-[0.24em] text-slate-400">
+                  {{ item.label }}
+                </p>
+                <p class="mt-2 font-display text-2xl tracking-tight text-slate-800">
+                  {{ item.value }}
+                </p>
+                <p class="mt-2 text-sm text-slate-500">
+                  {{ item.detail }}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-auto pt-10 flex flex-col gap-4 sm:flex-row">
+              <a
+                href="/CV_BARLIC_Francois.pdf"
+                download="CV_BARLIC_Francois.pdf"
+                class="inline-flex h-12 items-center justify-center rounded-full bg-primary-600 px-8 font-medium text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-primary-500 hover:shadow-hover focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+              >
+                <span class="relative z-10">Télécharger mon CV</span>
+              </a>
+              <a
+                :href="`mailto:${profile?.email || 'francois.barlic57@gmail.com'}`"
+                class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-medium text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2"
+              >
+                <span>Échanger par email</span>
+              </a>
+            </div>
+          </div>
+
+          <div
+            v-motion
+            :initial="{ opacity: 0, x: 24 }"
+            :visible-once="{ opacity: 1, x: 0, transition: { delay: 200 } }"
+            class="flex h-full flex-col rounded-[28px] border border-slate-100 bg-white p-6 sm:p-8 shadow-soft"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div class="max-w-sm">
+                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Atelier</p>
+                <p class="mt-4 font-display text-4xl tracking-tight text-slate-800">
+                  Frontend soigné, backend solide, système cohérent.
+                </p>
+              </div>
+              <span class="flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-700 font-display font-bold shadow-sm hidden sm:inline-flex">FB</span>
+            </div>
+
+            <div class="mt-8 grid gap-4">
+              <div
+                v-for="principle in principles"
+                :key="principle.label"
+                class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm"
+              >
+                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">{{ principle.label }}</p>
+                <p class="mt-3 text-slate-600">
+                  {{ principle.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-auto pt-8 grid gap-4 sm:grid-cols-2">
+              <div class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm">
+                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Stack favorite</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <span
+                    v-for="tech in stack"
+                    :key="tech"
+                    class="inline-flex rounded-full bg-white border border-slate-200 px-3 py-1.5 text-sm text-slate-600 shadow-sm"
+                  >
+                    {{ tech }}
+                  </span>
+                </div>
               </div>
 
-              <!-- Code decoration -->
-              <div class="absolute inset-0 p-8 font-mono text-xs text-white/20 overflow-hidden">
-                <pre class="leading-relaxed">
-const developer = {
-  name: "François Barlic",
-  role: "Fullstack Developer",
-  stack: ["Nuxt.js", "Django"],
-  passion: "Web Development",
-  location: "Pays Basque 🏄",
-  
-  skills: {
-    frontend: ["Vue", "Nuxt", "TS"],
-    backend: ["Django", "Python"],
-    tools: ["Git", "Scrum"]
-  },
-  
-  currentlyLearning: [
-    "Three.js",
-    "Advanced TypeScript"
-  ]
-};
-                </pre>
+              <div class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm">
+                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Base</p>
+                <p class="mt-3 font-display text-3xl tracking-tight text-slate-800">
+                  {{ profile?.location || 'Anglet - 64' }}
+                </p>
+                <p class="mt-3 text-slate-500 text-sm">
+                  Un ancrage local, une exigence sur la qualité de réalisation et une envie de construire des produits utiles.
+                </p>
               </div>
-
-              <!-- Gradient overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent 
-                       to-transparent" />
-            </div>
-
-            <!-- Floating badges -->
-            <div class="absolute -right-4 top-8 glass-card px-4 py-2 animate-float" style="animation-delay: 0s;">
-              <span class="font-mono text-sm text-neon-cyan">Nuxt.js</span>
-            </div>
-            <div class="absolute -left-4 bottom-24 glass-card px-4 py-2 animate-float" style="animation-delay: 1s;">
-              <span class="font-mono text-sm text-neon-purple">Django</span>
-            </div>
-            <div class="absolute right-8 -bottom-4 glass-card px-4 py-2 animate-float" style="animation-delay: 2s;">
-              <span class="font-mono text-sm text-neon-blue">Vue.js</span>
             </div>
           </div>
         </div>
-
-        <!-- Right: Content -->
-        <div v-motion :initial="{ opacity: 0, x: 50 }" :visible-once="{ opacity: 1, x: 0, transition: { delay: 400 } }">
-          <h3 class="text-3xl font-display font-bold mb-6">
-            Développeur passionné par le
-            <span class="gradient-text">web moderne</span>
-          </h3>
-
-          <p class="text-white/60 text-lg leading-relaxed mb-8">
-            {{ profile?.bio || `Étudiant en informatique et alternant chez Optera, je développe
-            des applications web avec les technologies modernes. Ma passion pour le code
-            me pousse à toujours apprendre et à créer des solutions élégantes et performantes.` }}
-          </p>
-
-          <!-- Highlights Grid -->
-          <div class="grid grid-cols-2 gap-4 mb-8">
-            <div v-for="(item, index) in highlights" :key="item.label" v-motion :initial="{ opacity: 0, y: 20 }"
-              :visible-once="{ opacity: 1, y: 0, transition: { delay: 500 + index * 100 } }"
-              class="glass-card p-4 group hover:border-neon-cyan/30 transition-colors">
-              <div class="text-2xl mb-2">{{ item.icon }}</div>
-              <div class="font-mono text-xs text-white/40 uppercase tracking-wider">
-                {{ item.label }}
-              </div>
-              <div class="font-display font-semibold text-white">
-                {{ item.value }}
-              </div>
-              <div class="font-mono text-xs text-neon-cyan">
-                {{ item.detail }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="mt-12 text-center">
-        <a href="/CV_BARLIC_Francois.pdf" download="CV_BARLIC_Francois.pdf" class="btn-primary inline-block">
-          <span class="relative z-10">Télécharger mon CV</span>
-        </a>
       </div>
     </div>
   </section>

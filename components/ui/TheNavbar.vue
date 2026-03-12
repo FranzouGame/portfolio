@@ -13,177 +13,154 @@ const navItems = [
   { label: 'Contact', href: '#contact' },
 ]
 
-onMounted(() => {
-  initTheme()
-  
-  window.addEventListener('scroll', () => {
-    isScrolled.value = window.scrollY > 50
-  })
-})
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 24
+}
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
+
+onMounted(() => {
+  initTheme()
+  handleScroll()
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
-  <nav
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-    :class="[
-      isScrolled
-        ? 'bg-dark-950/95 dark:bg-dark-950/95 light:bg-white/95 backdrop-blur-xl py-4'
-        : 'bg-transparent py-6'
-    ]"
-  >
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#hero" class="group flex items-center gap-3">
-        <div class="relative w-10 h-10">
-          <div class="absolute inset-0 bg-gradient-to-br from-neon-cyan to-neon-blue rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
-          <div class="absolute inset-0 flex items-center justify-center font-display font-bold text-dark-950">
-            FB
+  <nav class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div
+        class="rounded-[32px] border px-4 py-3 transition-all duration-500 sm:px-5"
+        :class="
+          isScrolled
+            ? 'border-white/40 bg-white/70 shadow-soft backdrop-blur-2xl'
+            : 'border-transparent bg-transparent backdrop-blur-sm'
+        "
+      >
+        <div class="flex items-center justify-between gap-4">
+          <a href="#hero" class="group flex min-w-0 items-center gap-3 sm:gap-4" @click="closeMobileMenu">
+            <span class="flex h-11 w-11 items-center justify-center rounded-full bg-primary-50 text-primary-700 sm:h-12 sm:w-12 text-lg sm:text-xl font-display font-bold shadow-sm transition-transform group-hover:scale-105">
+              FB
+            </span>
+            <span class="min-w-0">
+              <span class="block truncate font-display text-[1.35rem] tracking-tight text-slate-800 sm:text-[1.55rem] group-hover:text-primary-600 transition-colors">
+                François Barlic
+              </span>
+              <span class="mt-1 block font-mono text-[10px] uppercase tracking-[0.34em] text-slate-500 transition-colors group-hover:text-primary-500">
+                portfolio / full-stack
+              </span>
+            </span>
+          </a>
+
+          <div class="hidden items-center gap-1 xl:gap-2 lg:flex">
+            <a
+              v-for="item in navItems"
+              :key="item.href"
+              :href="item.href"
+              class="relative rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.24em] text-slate-600 transition-all duration-300 hover:text-primary-600 hover:bg-primary-50"
+            >
+              {{ item.label }}
+            </a>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3">
+            <button
+              class="group hidden h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white transition-all hover:border-primary-300 hover:bg-primary-50 lg:flex shadow-sm"
+              :title="isDark ? 'Mode clair' : 'Mode sombre'"
+              @click="toggleTheme"
+            >
+              <svg
+                v-if="isDark"
+                class="h-5 w-5 text-slate-500 transition-colors group-hover:text-primary-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              <svg
+                v-else
+                class="h-5 w-5 text-slate-500 transition-colors group-hover:text-primary-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
+              </svg>
+            </button>
+
+            <button
+              class="relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm lg:hidden"
+              :aria-expanded="isMobileMenuOpen"
+              aria-label="Menu"
+              @click="isMobileMenuOpen = !isMobileMenuOpen"
+            >
+              <div class="relative h-5 w-6">
+                <span
+                  class="absolute left-0 h-0.5 w-full rounded-full bg-slate-800 transition-all duration-300"
+                  :class="isMobileMenuOpen ? 'top-2 rotate-45' : 'top-0'"
+                />
+                <span
+                  class="absolute left-0 top-2 h-0.5 w-full rounded-full bg-slate-800 transition-all duration-300"
+                  :class="isMobileMenuOpen ? 'opacity-0' : 'opacity-100'"
+                />
+                <span
+                  class="absolute left-0 h-0.5 w-full rounded-full bg-slate-800 transition-all duration-300"
+                  :class="isMobileMenuOpen ? 'top-2 -rotate-45' : 'top-4'"
+                />
+              </div>
+            </button>
           </div>
         </div>
-      </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center gap-1">
-        
-        <a
-          v-for="item in navItems"
-          :key="item.href"
-          :href="item.href"
-          class="relative px-4 py-2 font-mono text-sm text-white/70 hover:text-white transition-colors group"
+        <Transition
+          enter-active-class="transition-all duration-300 ease-out"
+          enter-from-class="opacity-0 -translate-y-4"
+          enter-to-class="opacity-100 translate-y-0"
+          leave-active-class="transition-all duration-200 ease-in"
+          leave-from-class="opacity-100 translate-y-0"
+          leave-to-class="opacity-0 -translate-y-4"
         >
-          {{ item.label }}
-          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-neon-cyan to-neon-blue group-hover:w-full transition-all duration-300" />
-        </a>
+          <div v-if="isMobileMenuOpen" class="mt-4 lg:hidden">
+            <div class="rounded-2xl border border-white/60 bg-white/90 shadow-soft backdrop-blur-xl space-y-2 p-3">
+              <a
+                v-for="(item, index) in navItems"
+                :key="item.href"
+                :href="item.href"
+                class="flex items-center justify-between rounded-xl px-4 py-3 font-mono text-[11px] uppercase tracking-[0.24em] text-slate-700 transition-all hover:bg-primary-50 hover:text-primary-700"
+                @click="closeMobileMenu"
+              >
+                <span>{{ item.label }}</span>
+                <span class="text-primary-400">{{ String(index + 1).padStart(2, '0') }}</span>
+              </a>
+
+              <button
+                class="mt-2 flex w-full items-center justify-between rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 font-mono text-[11px] uppercase tracking-[0.24em] text-slate-700 transition-all hover:bg-primary-50 hover:text-primary-700"
+                @click="toggleTheme"
+              >
+                <span>{{ isDark ? 'Mode clair' : 'Mode sombre' }}</span>
+                <span class="text-primary-400">{{ isDark ? 'Light' : 'Dark' }}</span>
+              </button>
+            </div>
+          </div>
+        </Transition>
       </div>
-
-      <!-- Theme Toggle Button -->
-      <button
-        @click="toggleTheme"
-        class="hidden lg:flex items-center justify-center w-12 h-12 rounded-xl bg-white/5 border border-white/10 hover:border-neon-cyan/50 hover:bg-neon-cyan/10 transition-all group"
-        :title="isDark ? 'Mode clair' : 'Mode sombre'"
-      >
-        <!-- Sun icon (shown in dark mode) -->
-        <svg
-          v-if="isDark"
-          class="w-5 h-5 text-white/70 group-hover:text-neon-cyan transition-colors"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
-        <!-- Moon icon (shown in light mode) -->
-        <svg
-          v-else
-          class="w-5 h-5 text-dark-950 group-hover:text-neon-blue transition-colors"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-          />
-        </svg>
-      </button>
-
-      <!-- Mobile Menu Button -->
-      <button
-        class="lg:hidden relative w-10 h-10 flex items-center justify-center"
-        @click="isMobileMenuOpen = !isMobileMenuOpen"
-        :aria-expanded="isMobileMenuOpen"
-        aria-label="Menu"
-      >
-        <div class="relative w-6 h-5">
-          <span
-            class="absolute left-0 w-full h-0.5 bg-white transition-all duration-300"
-            :class="isMobileMenuOpen ? 'top-2 rotate-45' : 'top-0'"
-          />
-          <span
-            class="absolute left-0 top-2 w-full h-0.5 bg-white transition-all duration-300"
-            :class="isMobileMenuOpen ? 'opacity-0' : 'opacity-100'"
-          />
-          <span
-            class="absolute left-0 w-full h-0.5 bg-white transition-all duration-300"
-            :class="isMobileMenuOpen ? 'top-2 -rotate-45' : 'top-4'"
-          />
-        </div>
-      </button>
     </div>
-
-    <!-- Mobile Menu -->
-    <Transition
-      enter-active-class="transition-all duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-4"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition-all duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-4"
-    >
-      <div
-        v-if="isMobileMenuOpen"
-        class="lg:hidden absolute top-full left-0 right-0 bg-dark-950/98 backdrop-blur-xl border-t border-white/10"
-      >
-        <div class="max-w-7xl mx-auto px-6 py-6 space-y-4">
-          
-          <a
-            v-for="item in navItems"
-            :key="item.href"
-            :href="item.href"
-            class="block font-mono text-lg text-white/70 hover:text-neon-cyan transition-colors"
-            @click="closeMobileMenu"
-          >
-            {{ item.label }}
-          </a>
-          
-          <!-- Mobile Theme Toggle -->
-          <button
-            @click="toggleTheme"
-            class="flex items-center gap-3 font-mono text-lg text-white/70 hover:text-neon-cyan transition-colors"
-          >
-            <svg
-              v-if="isDark"
-              class="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-            <svg
-              v-else
-              class="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-              />
-            </svg>
-            {{ isDark ? 'Mode clair' : 'Mode sombre' }}
-          </button>
-        </div>
-      </div>
-    </Transition>
   </nav>
 </template>

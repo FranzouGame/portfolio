@@ -12,87 +12,69 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Couleurs principales
-        dark: {
-          50: '#e8e8ec',
-          100: '#c5c5ce',
-          200: '#9f9fb0',
-          300: '#797992',
-          400: '#5c5c7a',
-          500: '#3f3f62',
-          600: '#38385a',
-          700: '#2f2f50',
-          800: '#272746',
-          900: '#1a1a2e',
-          950: '#0a0a0f',
+        primary: {
+          50: '#f0f5fa',
+          100: '#e1ebf4',
+          200: '#c5d9eb',
+          300: '#9bc0e0',
+          400: '#6ca1ce',
+          500: '#4b85b6',
+          600: '#396b99',
+          700: '#2f567e',
+          800: '#284768',
+          900: '#243c56',
+          950: '#18273a',
         },
-        accent: {
-          50: '#e0f7fa',
-          100: '#b2ebf2',
-          200: '#80deea',
-          300: '#4dd0e1',
-          400: '#26c6da',
-          500: '#00bcd4',
-          600: '#00acc1',
-          700: '#0097a7',
-          800: '#00838f',
-          900: '#006064',
+        slate: {
+          50: '#f6f7f8',
+          100: '#ebedef',
+          200: '#d3d7dc',
+          300: '#adb5bf',
+          400: '#818d9b',
+          500: '#606e7e',
+          600: '#4c5866',
+          700: '#3f4955',
+          800: '#363d46',
+          900: '#2f353c',
+          950: '#1d2126',
         },
-        neon: {
-          cyan: '#00f5ff',
-          purple: '#bf00ff',
-          pink: '#ff00aa',
-          blue: '#0066ff',
-        },
+        surface: {
+          50: '#ffffff',
+          100: '#f8fafc',
+          200: '#f1f5f9',
+        }
       },
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        mono: ['Space Mono', 'monospace'],
+        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+        display: ['"Zen Old Mincho"', 'serif'],
+        mono: ['"IBM Plex Mono"', 'monospace'],
+      },
+      boxShadow: {
+        'soft': '0 4px 20px -2px rgba(47, 86, 126, 0.05)',
+        'hover': '0 10px 30px -5px rgba(47, 86, 126, 0.1)',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.5s ease-out',
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'gradient': 'gradient 8s ease infinite',
-        'border-flow': 'borderFlow 3s linear infinite',
+        float: 'float 7s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.7s ease-out',
+        drift: 'drift 9s ease-in-out infinite',
+        'spin-slow': 'spin 30s linear infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px #00f5ff, 0 0 10px #00f5ff, 0 0 15px #00f5ff' },
-          '100%': { boxShadow: '0 0 10px #00f5ff, 0 0 20px #00f5ff, 0 0 30px #00f5ff' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        slideDown: {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
+          '50%': { transform: 'translateY(-12px)' },
         },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        borderFlow: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '100%': { backgroundPosition: '200% 50%' },
+        drift: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -8px, 0)' },
         },
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'mesh-gradient': 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%)',
+        'mesh-light': 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 48%, #e1ebf4 100%)',
       },
       backdropBlur: {
         xs: '2px',

@@ -1,52 +1,45 @@
 <script setup lang="ts">
-// Fetch all data
 const { data: profile } = await useFetch('/api/profile')
 const { data: skills } = await useFetch('/api/skills')
 const { data: projects } = await useFetch('/api/projects')
 const { data: experiences } = await useFetch('/api/experiences')
 const { data: education } = await useFetch('/api/education')
 
-// SEO
 useSeoMeta({
   title: 'François Barlic | Développeur Fullstack',
   ogTitle: 'François Barlic | Développeur Fullstack',
-  description: 'Portfolio de François Barlic - Développeur Fullstack passionné par Nuxt.js, Django et les technologies web modernes.',
-  ogDescription: 'Portfolio de François Barlic - Développeur Fullstack passionné par Nuxt.js, Django et les technologies web modernes.',
+  description: 'Portfolio de François Barlic, développeur fullstack passionné par Nuxt.js, Django et les expériences web soignées.',
+  ogDescription: 'Portfolio de François Barlic, développeur fullstack passionné par Nuxt.js, Django et les expériences web soignées.',
   ogImage: '/og-image.png',
   twitterCard: 'summary_large_image',
 })
 </script>
 
 <template>
-  <div class="min-h-screen">
-    <!-- Navigation -->
+  <div class="bg-surface-50 text-slate-900 relative min-h-screen overflow-hidden font-sans transition-colors duration-500">
+    <!-- Light Mesh Gradient Background for Japanese Minimalist Aesthetic -->
+    <div class="pointer-events-none absolute inset-0 z-0 bg-mesh-light opacity-50" />
+
     <UiTheNavbar />
+    <UiSectionRail />
 
-    <!-- Main Content -->
-    <main>
-      <!-- Hero Section -->
+    <main class="relative z-10">
       <SectionsHeroSection :profile="profile" />
-
-      <!-- About Section -->
+      <UiDecoSectionDivider variant="wave" />
       <SectionsAboutSection :profile="profile" />
-
-      <!-- Skills Section -->
+      <UiDecoSectionDivider variant="dot" />
       <SectionsSkillsSection :skills="skills || []" />
-
-      <!-- Projects Section -->
+      <UiDecoSectionDivider variant="line" />
       <SectionsProjectsSection :projects="projects || []" />
-
-      <!-- Timeline Section -->
-      <SectionsTimelineSection 
-        :experiences="experiences || []" 
-        :education="education || []" 
+      <UiDecoSectionDivider variant="wave" />
+      <SectionsTimelineSection
+        :experiences="experiences || []"
+        :education="education || []"
       />
-
-      <!-- Contact Section -->
+      <UiDecoSectionDivider variant="dot" />
       <SectionsContactSection :profile="profile" />
     </main>
 
-    <!-- Footer -->
     <UiTheFooter />
   </div>
 </template>
