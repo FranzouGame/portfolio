@@ -79,7 +79,7 @@ const scrollToSection = (href: string) => {
         <div class="mt-8 flex flex-col gap-3 border-t border-slate-100 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {{ currentYear }} François Barlic. Tous droits réservés.</p>
           <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-primary-400">
-            blanc, bleu pastel, minimalisme japonais contemporain
+            palette sensible au thème, minimalisme japonais contemporain
           </p>
         </div>
       </div>

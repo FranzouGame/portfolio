@@ -51,7 +51,11 @@ const principles = [
   },
 ]
 
-const stack = ['Nuxt.js', 'Vue', 'Django', 'TypeScript', 'TailwindCSS', 'Python']
+const engagement = {
+  label: 'Engagement',
+  quote: 'Concevoir peu, mais juste: une interface nette, des interactions cohérentes et une qualité d’exécution visible dans chaque détail.',
+  signature: 'Clarté, rythme, finition.',
+}
 </script>
 
 <template>
@@ -127,13 +131,13 @@ const stack = ['Nuxt.js', 'Vue', 'Django', 'TypeScript', 'TailwindCSS', 'Python'
               <a
                 href="/CV_BARLIC_Francois.pdf"
                 download="CV_BARLIC_Francois.pdf"
-                class="inline-flex h-12 items-center justify-center rounded-full bg-primary-600 px-8 font-medium text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-primary-500 hover:shadow-hover focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+                class="btn-primary"
               >
                 <span class="relative z-10">Télécharger mon CV</span>
               </a>
               <a
                 :href="`mailto:${profile?.email || 'francois.barlic57@gmail.com'}`"
-                class="inline-flex h-12 items-center justify-center rounded-full border border-slate-200 bg-white px-8 font-medium text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2"
+                class="btn-secondary"
               >
                 <span>Échanger par email</span>
               </a>
@@ -170,17 +174,14 @@ const stack = ['Nuxt.js', 'Vue', 'Django', 'TypeScript', 'TailwindCSS', 'Python'
             </div>
 
             <div class="mt-auto pt-8 grid gap-4 sm:grid-cols-2">
-              <div class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm">
-                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Stack favorite</p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                  <span
-                    v-for="tech in stack"
-                    :key="tech"
-                    class="inline-flex rounded-full bg-white border border-slate-200 px-3 py-1.5 text-sm text-slate-600 shadow-sm"
-                  >
-                    {{ tech }}
-                  </span>
-                </div>
+              <div class="floating-note p-5">
+                <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">{{ engagement.label }}</p>
+                <blockquote class="mt-4 font-display text-2xl tracking-tight text-slate-800">
+                  “{{ engagement.quote }}”
+                </blockquote>
+                <p class="mt-5 font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">
+                  {{ engagement.signature }}
+                </p>
               </div>
 
               <div class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm">

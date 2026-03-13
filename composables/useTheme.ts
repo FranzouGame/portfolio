@@ -3,10 +3,24 @@ export const useTheme = () => {
 
   const isDark = computed(() => colorMode.value === 'dark')
 
+  const getPreferredTheme = (): 'dark' | 'light' => {
+    if (!import.meta.client) {
+      return colorMode.value
+    }
+
+    const saved = localStorage.getItem('theme')
+    if (saved === 'dark' || saved === 'light') {
+      return saved
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+
   const updateTheme = () => {
     if (import.meta.client) {
       document.documentElement.classList.toggle('dark', colorMode.value === 'dark')
       document.documentElement.classList.toggle('light', colorMode.value === 'light')
+      document.documentElement.dataset.theme = colorMode.value
       localStorage.setItem('theme', colorMode.value)
     }
   }
@@ -18,8 +32,7 @@ export const useTheme = () => {
 
   const initTheme = () => {
     if (import.meta.client) {
-      const saved = localStorage.getItem('theme') as 'dark' | 'light' | null
-      colorMode.value = saved || 'light'
+      colorMode.value = getPreferredTheme()
       updateTheme()
     }
   }

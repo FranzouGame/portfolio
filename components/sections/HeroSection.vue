@@ -9,6 +9,8 @@ const props = defineProps<{
   } | null
 }>()
 
+const { isDark } = useTheme()
+
 const nameParts = computed(() => {
   const fullName = props.profile?.name || 'François Barlic'
   const [firstName, ...rest] = fullName.split(' ')
@@ -29,7 +31,7 @@ const scrollToSection = (selector: string) => {
     id="hero"
     class="relative flex min-h-screen scroll-mt-24 flex-col items-center justify-center overflow-hidden px-4 pb-16 pt-24 sm:px-6 lg:px-8"
   >
-    <div class="pointer-events-none absolute inset-x-0 top-0 h-[40rem] bg-[radial-gradient(ellipse_at_top,rgba(225,235,244,0.4),transparent_60%)]" />
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[40rem] hero-halo opacity-50" />
 
     <!-- Japanese decorative elements -->
     <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -42,11 +44,10 @@ const scrollToSection = (selector: string) => {
     </div>
 
     <!-- 3D Canvas Background Area -->
-    <div class="absolute inset-0 z-0 flex items-center justify-center opacity-70">
-      <div class="relative h-[80vh] w-[80vw] max-w-5xl rounded-full opacity-60 blur-3xl bg-primary-100" />
+    <div class="absolute inset-0 z-0 flex items-center justify-center opacity-60">
+      <div class="hero-halo relative h-[80vh] w-[80vw] max-w-5xl rounded-full opacity-60 blur-3xl" />
       <div class="absolute inset-0">
         <ClientOnly>
-          <!-- Keep the component for now, it will be replaced by the Enso/Torii later -->
           <LazyThreeParticleField />
         </ClientOnly>
       </div>
@@ -57,7 +58,7 @@ const scrollToSection = (selector: string) => {
         v-motion
         :initial="{ opacity: 0, y: 16 }"
         :visible-once="{ opacity: 1, y: 0, transition: { delay: 100 } }"
-        class="inline-flex items-center gap-2.5 rounded-full border border-primary-200 bg-white/80 backdrop-blur-md px-4 py-2 text-[13px] font-medium text-primary-700 shadow-sm"
+        class="eyebrow-chip text-primary-700"
       >
         <span class="relative flex h-2 w-2">
           <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
@@ -70,7 +71,8 @@ const scrollToSection = (selector: string) => {
         v-motion
         :initial="{ opacity: 0, scale: 0.95 }"
         :visible-once="{ opacity: 1, scale: 1, transition: { delay: 300, duration: 800, type: 'spring' } }"
-        class="mt-8 font-display text-[clamp(4rem,12vw,9rem)] leading-[0.85] tracking-tight text-slate-800 mix-blend-multiply"
+        class="mt-8 font-display text-[clamp(4rem,12vw,9rem)] leading-[0.85] tracking-tight text-slate-800"
+        :class="{ 'mix-blend-multiply': !isDark }"
       >
         <span class="block">{{ nameParts.firstName }}</span>
         <span class="text-primary-600 block">{{ nameParts.lastName }}</span>
@@ -91,10 +93,10 @@ const scrollToSection = (selector: string) => {
         :visible-once="{ opacity: 1, y: 0, transition: { delay: 700 } }"
         class="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
       >
-        <button class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-full bg-primary-600 px-8 font-medium text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-primary-500 hover:shadow-hover focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2" @click="scrollToSection('#projects')">
+        <button class="btn-primary w-full sm:w-auto" @click="scrollToSection('#projects')">
           <span>Voir mes projets</span>
         </button>
-        <button class="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-full border border-slate-200 bg-white/80 backdrop-blur-sm px-8 font-medium text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2" @click="scrollToSection('#contact')">
+        <button class="btn-secondary w-full sm:w-auto" @click="scrollToSection('#contact')">
           <span>Me contacter</span>
         </button>
       </div>

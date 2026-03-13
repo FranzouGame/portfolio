@@ -2,7 +2,7 @@
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 
-const { isDark, toggleTheme, initTheme } = useTheme()
+const { isDark, toggleTheme } = useTheme()
 
 const navItems = [
   { label: 'Accueil', href: '#hero' },
@@ -22,7 +22,6 @@ const closeMobileMenu = () => {
 }
 
 onMounted(() => {
-  initTheme()
   handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
@@ -40,7 +39,7 @@ onUnmounted(() => {
         :class="
           isScrolled
             ? 'border-white/40 bg-white/70 shadow-soft backdrop-blur-2xl'
-            : 'border-transparent bg-transparent backdrop-blur-sm'
+            : 'border-transparent bg-transparent shadow-none backdrop-blur-sm'
         "
       >
         <div class="flex items-center justify-between gap-4">
@@ -71,7 +70,7 @@ onUnmounted(() => {
 
           <div class="flex items-center gap-2 sm:gap-3">
             <button
-              class="group hidden h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white transition-all hover:border-primary-300 hover:bg-primary-50 lg:flex shadow-sm"
+              class="group hidden h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-600 shadow-soft backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:border-primary-300 hover:bg-primary-50 hover:text-primary-600 lg:flex"
               :title="isDark ? 'Mode clair' : 'Mode sombre'"
               @click="toggleTheme"
             >
@@ -106,7 +105,7 @@ onUnmounted(() => {
             </button>
 
             <button
-              class="relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm lg:hidden"
+              class="relative flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-600 shadow-soft backdrop-blur-xl lg:hidden"
               :aria-expanded="isMobileMenuOpen"
               aria-label="Menu"
               @click="isMobileMenuOpen = !isMobileMenuOpen"
@@ -138,7 +137,7 @@ onUnmounted(() => {
           leave-to-class="opacity-0 -translate-y-4"
         >
           <div v-if="isMobileMenuOpen" class="mt-4 lg:hidden">
-            <div class="rounded-2xl border border-white/60 bg-white/90 shadow-soft backdrop-blur-xl space-y-2 p-3">
+            <div class="space-y-2 rounded-[28px] border border-white/60 bg-white/80 p-3 shadow-soft backdrop-blur-2xl">
               <a
                 v-for="(item, index) in navItems"
                 :key="item.href"

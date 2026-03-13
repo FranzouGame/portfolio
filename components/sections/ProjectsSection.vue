@@ -193,7 +193,7 @@ onUnmounted(() => {
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="section-shell px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div class="max-w-3xl">
             <span
               v-motion

@@ -2,6 +2,7 @@
 import * as THREE from 'three'
 
 const containerRef = ref<HTMLElement | null>(null)
+const { isDark } = useTheme()
 
 let scene: THREE.Scene | null = null
 let camera: THREE.PerspectiveCamera | null = null
@@ -22,15 +23,51 @@ let currentPointer = { x: 0, y: 0 }
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+const getPalette = () => {
+  if (isDark.value) {
+    return {
+      orb: '#9fc3eb',
+      outline: '#d7e6fb',
+      rings: [
+        { radius: 4.8, tube: 0.045, color: '#8cb2dd', opacity: 0.24, rotation: [0.7, 0.2, 1.1] },
+        { radius: 6.0, tube: 0.035, color: '#dce8fb', opacity: 0.2, rotation: [1.15, 0.9, 0.3] },
+      ],
+      particles: ['#8fb7e5', '#dce8fb', '#5f81ad'],
+      ambientIntensity: 1.2,
+      keyColor: 0xcfe0ff,
+      keyIntensity: 22,
+      fillColor: 0x6d8fbb,
+      fillIntensity: 16,
+    }
+  }
+
+  return {
+    orb: '#dce7f6',
+    outline: '#9dbde2',
+    rings: [
+      { radius: 4.8, tube: 0.045, color: '#9dbde2', opacity: 0.22, rotation: [0.7, 0.2, 1.1] },
+      { radius: 6.0, tube: 0.035, color: '#dce7f6', opacity: 0.18, rotation: [1.15, 0.9, 0.3] },
+    ],
+    particles: ['#9dbde2', '#dce7f6', '#8aaed5'],
+    ambientIntensity: 1.55,
+    keyColor: 0xe6f0ff,
+    keyIntensity: 28,
+    fillColor: 0xa5c5e9,
+    fillIntensity: 18,
+  }
+}
+
 const createOrb = () => {
   if (!world) return
+
+  const palette = getPalette()
 
   orbGeometry = new THREE.IcosahedronGeometry(3.1, 3)
   baseOrbPositions = new Float32Array(orbGeometry.attributes.position.array as Float32Array)
   orbNormals = new Float32Array(orbGeometry.attributes.normal.array as Float32Array)
 
   const orbMaterial = new THREE.MeshPhysicalMaterial({
-    color: '#dce7f6',
+    color: palette.orb,
     roughness: 0.08,
     metalness: 0,
     transmission: 0.78,
@@ -49,7 +86,7 @@ const createOrb = () => {
   outlineMesh = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({
-      color: '#9dbde2',
+      color: palette.outline,
       transparent: true,
       opacity: 0.24,
     }),
@@ -61,10 +98,8 @@ const createOrb = () => {
 const createRings = () => {
   if (!world) return
 
-  const ringConfigs = [
-    { radius: 4.8, tube: 0.045, color: '#9dbde2', opacity: 0.22, rotation: [0.7, 0.2, 1.1] },
-    { radius: 6.0, tube: 0.035, color: '#dce7f6', opacity: 0.18, rotation: [1.15, 0.9, 0.3] },
-  ]
+  const palette = getPalette()
+  const ringConfigs = palette.rings
 
   rings = ringConfigs.map(config => {
     const ring = new THREE.Mesh(
@@ -85,16 +120,14 @@ const createRings = () => {
 const createParticles = () => {
   if (!world) return
 
+  const palette = getPalette()
+
   const count = 220
   const positions = new Float32Array(count * 3)
   const colors = new Float32Array(count * 3)
   baseParticlePositions = new Float32Array(count * 3)
 
-  const palette = [
-    new THREE.Color('#9dbde2'),
-    new THREE.Color('#dce7f6'),
-    new THREE.Color('#8aaed5'),
-  ]
+  const particlePalette = palette.particles.map(color => new THREE.Color(color))
 
   for (let index = 0; index < count; index++) {
     const angle = Math.random() * Math.PI * 2
@@ -110,7 +143,7 @@ const createParticles = () => {
     baseParticlePositions[offset + 1] = positions[offset + 1]
     baseParticlePositions[offset + 2] = positions[offset + 2]
 
-    const color = palette[Math.floor(Math.random() * palette.length)].clone()
+    const color = particlePalette[Math.floor(Math.random() * particlePalette.length)].clone()
     color.offsetHSL((Math.random() - 0.5) * 0.03, 0.02, 0.05)
     colors[offset] = color.r
     colors[offset + 1] = color.g
@@ -161,10 +194,11 @@ const initScene = () => {
   renderer.outputColorSpace = THREE.SRGBColorSpace
   containerRef.value.appendChild(renderer.domElement)
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.55)
-  const keyLight = new THREE.PointLight(0xe6f0ff, 28, 60)
+  const palette = getPalette()
+  const ambientLight = new THREE.AmbientLight(0xffffff, palette.ambientIntensity)
+  const keyLight = new THREE.PointLight(palette.keyColor, palette.keyIntensity, 60)
   keyLight.position.set(8, 8, 14)
-  const fillLight = new THREE.PointLight(0xa5c5e9, 18, 60)
+  const fillLight = new THREE.PointLight(palette.fillColor, palette.fillIntensity, 60)
   fillLight.position.set(-10, -6, 10)
 
   scene.add(ambientLight, keyLight, fillLight)
@@ -285,6 +319,7 @@ const disposeScene = () => {
 
   renderer?.dispose()
   renderer?.domElement.remove()
+  animationId = 0
 
   scene = null
   camera = null
@@ -308,6 +343,14 @@ onMounted(() => {
   containerRef.value?.addEventListener('pointermove', handlePointerMove, { passive: true })
   containerRef.value?.addEventListener('pointerleave', resetPointer, { passive: true })
   window.addEventListener('resize', handleResize, { passive: true })
+})
+
+watch(isDark, () => {
+  if (!containerRef.value || !scene) return
+
+  disposeScene()
+  initScene()
+  animate()
 })
 
 onUnmounted(() => {

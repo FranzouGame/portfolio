@@ -16,9 +16,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="bg-surface-50 text-slate-900 relative min-h-screen overflow-hidden font-sans transition-colors duration-500">
-    <!-- Light Mesh Gradient Background for Japanese Minimalist Aesthetic -->
-    <div class="pointer-events-none absolute inset-0 z-0 bg-mesh-light opacity-50" />
+  <div class="relative min-h-screen overflow-hidden font-sans text-slate-900 transition-colors duration-500">
+    <div class="pointer-events-none absolute inset-0 z-0 bg-mesh-theme opacity-50" />
 
     <UiTheNavbar />
     <UiSectionRail />
