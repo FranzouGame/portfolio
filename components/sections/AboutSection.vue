@@ -1,12 +1,8 @@
 <script setup lang="ts">
+import type { ProfileData } from '~/types/api'
+
 const props = defineProps<{
-  profile: {
-    name: string
-    bio: string
-    location?: string
-    email: string
-    phone?: string
-  } | null
+  profile: Pick<ProfileData, 'name' | 'bio' | 'location' | 'email' | 'phone'> | null
 }>()
 
 const highlights = [

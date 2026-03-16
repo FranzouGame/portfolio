@@ -1,13 +1,11 @@
 <script setup lang="ts">
+import type { ProfileData } from '~/types/api'
+
 const props = defineProps<{
-  profile: {
-    email: string
-    phone?: string
-    location?: string
-    githubUrl?: string
-    linkedinUrl?: string
-    instagramUrl?: string
-  } | null
+  profile: Pick<
+    ProfileData,
+    'email' | 'phone' | 'location' | 'githubUrl' | 'linkedinUrl' | 'instagramUrl'
+  > | null
 }>()
 
 const form = reactive({

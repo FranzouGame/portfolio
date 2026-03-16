@@ -1,20 +1,8 @@
 <script setup lang="ts">
-interface Project {
-  id: number
-  title: string
-  slug: string
-  description: string
-  longDescription?: string
-  imageUrl?: string
-  githubUrl?: string
-  liveUrl?: string
-  technologies: string[]
-  category: string
-  featured: boolean
-}
+import type { ProjectData } from '~/types/api'
 
 const props = defineProps<{
-  projects: Project[]
+  projects: ProjectData[]
 }>()
 
 const currentIndex = ref(0)
@@ -123,15 +111,15 @@ const getCategoryColor = (category: string) => {
   return colors[category] || 'text-slate-500 border-slate-200 bg-white'
 }
 
-const getProjectUrl = (project: Project) => {
+const getProjectUrl = (project: ProjectData) => {
   return project.liveUrl || project.githubUrl || '#'
 }
 
-const hasProjectImage = (project: Project) => {
+const hasProjectImage = (project: ProjectData) => {
   return projectImagesEnabled && Boolean(project.imageUrl)
 }
 
-const getPosterStyle = (project: Project) => {
+const getPosterStyle = (project: ProjectData) => {
   if (!hasProjectImage(project)) return {}
 
   return {
@@ -141,7 +129,7 @@ const getPosterStyle = (project: Project) => {
   }
 }
 
-const getProjectMonogram = (project: Project) => {
+const getProjectMonogram = (project: ProjectData) => {
   return project.title
     .split(' ')
     .map(word => word[0])

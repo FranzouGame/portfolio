@@ -1,12 +1,8 @@
 <script setup lang="ts">
+import type { ProfileData } from '~/types/api'
+
 const props = defineProps<{
-  profile: {
-    name: string
-    title: string
-    subtitle?: string
-    bio: string
-    location?: string
-  } | null
+  profile: Pick<ProfileData, 'name' | 'title' | 'subtitle' | 'bio' | 'location'> | null
 }>()
 
 const { isDark } = useTheme()

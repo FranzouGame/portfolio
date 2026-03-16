@@ -1,9 +1,17 @@
 <script setup lang="ts">
-const { data: profile } = await useFetch('/api/profile')
-const { data: skills } = await useFetch('/api/skills')
-const { data: projects } = await useFetch('/api/projects')
-const { data: experiences } = await useFetch('/api/experiences')
-const { data: education } = await useFetch('/api/education')
+import type {
+  EducationData,
+  ExperienceData,
+  ProfileData,
+  ProjectData,
+  SkillData,
+} from '~/types/api'
+
+const { data: profile } = await useFetch<ProfileData | null>('/api/profile')
+const { data: skills } = await useFetch<SkillData[]>('/api/skills')
+const { data: projects } = await useFetch<ProjectData[]>('/api/projects')
+const { data: experiences } = await useFetch<ExperienceData[]>('/api/experiences')
+const { data: education } = await useFetch<EducationData[]>('/api/education')
 
 useSeoMeta({
   title: 'François Barlic | Développeur Fullstack',

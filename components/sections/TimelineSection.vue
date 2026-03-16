@@ -1,31 +1,9 @@
 <script setup lang="ts">
-interface Experience {
-  id: number
-  title: string
-  company: string
-  location?: string
-  type: string
-  startDate: string
-  endDate?: string
-  current: boolean
-  description: string
-  technologies: string[]
-}
-
-interface Education {
-  id: number
-  degree: string
-  school: string
-  location?: string
-  startDate: string
-  endDate?: string
-  current: boolean
-  description: string
-}
+import type { EducationData, ExperienceData } from '~/types/api'
 
 const props = defineProps<{
-  experiences: Experience[]
-  education: Education[]
+  experiences: ExperienceData[]
+  education: EducationData[]
 }>()
 
 const activeTab = ref<'experience' | 'education'>('experience')
