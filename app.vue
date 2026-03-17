@@ -17,5 +17,6 @@ onMounted(() => {
 </script>
 
 <template>
+  <UiPageSideOrnaments />
   <NuxtPage />
 </template>

@@ -13,6 +13,43 @@
   }
 }
 
+@keyframes side-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes side-breathe {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.38;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes side-glow {
+  0%,
+  100% {
+    opacity: 0.22;
+    box-shadow: 0 0 0 rgb(var(--accent) / 0);
+  }
+
+  50% {
+    opacity: 0.46;
+    box-shadow: 0 0 18px rgb(var(--accent) / 0.18);
+  }
+}
+
 @layer base {
   :root,
   .light {
@@ -677,6 +714,109 @@
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 0.78),
       0 0 0 4px rgb(var(--accent) / 0.08);
+  }
+
+  .side-ornament {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 84px;
+    opacity: 0.7;
+  }
+
+  .side-ornament-left {
+    left: 0.35rem;
+  }
+
+  .side-ornament-right {
+    right: 0.35rem;
+  }
+
+  .side-ornament-rail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .side-ornament-line {
+    width: 1px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, transparent, rgb(var(--line) / 0.36), transparent);
+  }
+
+  .side-ornament-line-top {
+    height: 160px;
+  }
+
+  .side-ornament-line-bottom {
+    height: 140px;
+  }
+
+  .side-ornament-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(var(--accent) / 0.68);
+  }
+
+  .side-ornament-dot-soft {
+    background: rgb(var(--accent-soft) / 0.58);
+  }
+
+  .side-ornament-twig {
+    position: absolute;
+    left: 0;
+    top: 16%;
+    color: rgb(var(--accent-strong));
+    opacity: 0.24;
+    transform: scale(0.92);
+  }
+
+  .side-ornament-star {
+    position: absolute;
+    left: 0.8rem;
+    bottom: 18%;
+    color: rgb(var(--accent));
+    opacity: 0.36;
+  }
+
+  .side-ornament-enso {
+    position: absolute;
+    right: -0.2rem;
+    top: 18%;
+    color: rgb(var(--accent-strong));
+    opacity: 0.22;
+  }
+
+  .side-ornament-wave {
+    position: absolute;
+    right: -3.8rem;
+    bottom: 16%;
+    color: rgb(var(--accent));
+    opacity: 0.24;
+    transform: rotate(90deg) scale(0.8);
+    transform-origin: center;
+  }
+
+  .side-ornament-drift {
+    animation: side-drift 8s ease-in-out infinite;
+  }
+
+  .side-ornament-float {
+    animation: side-drift 10s ease-in-out infinite;
+  }
+
+  .side-ornament-breathe {
+    animation: side-breathe 7s ease-in-out infinite;
+  }
+
+  .side-ornament-glow {
+    animation: side-glow 6s ease-in-out infinite;
   }
 }
 
