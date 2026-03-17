@@ -28,7 +28,6 @@ useSeoMeta({
     <div class="pointer-events-none absolute inset-0 z-0 bg-mesh-theme opacity-50" />
 
     <UiTheNavbar />
-    <UiSectionRail />
 
     <main class="relative z-10">
       <SectionsHeroSection :profile="profile" />
