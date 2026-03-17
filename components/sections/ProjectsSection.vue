@@ -393,15 +393,18 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div v-if="currentProject" class="space-y-4">
-            <div class="surface-card-accent p-6">
+          <div v-if="currentProject" class="space-y-4 xl:grid xl:h-[560px] xl:grid-rows-[minmax(0,1fr)_auto_auto] xl:gap-4 xl:space-y-0">
+            <div class="surface-card-accent flex min-h-0 flex-col p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Projet actif</p>
               <p class="mt-4 font-display text-3xl tracking-tight text-slate-800">
                 {{ currentProject.title }}
               </p>
-              <p class="mt-4 text-slate-600">
-                {{ currentProject.longDescription || currentProject.description }}
-              </p>
+
+              <div class="mt-4 min-h-0 flex-1 overflow-y-auto pr-2">
+                <p class="text-slate-600">
+                  {{ currentProject.longDescription || currentProject.description }}
+                </p>
+              </div>
 
               <div class="mt-6 grid gap-3 sm:grid-cols-2">
                 <div class="rounded-xl border border-white/60 bg-white/70 p-4">
@@ -421,7 +424,7 @@ onUnmounted(() => {
 
             <div class="surface-card p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Technologies</p>
-              <div class="mt-4 flex flex-wrap gap-2">
+              <div class="mt-4 flex max-h-28 flex-wrap gap-2 overflow-y-auto pr-2">
                 <span
                   v-for="tech in currentProject.technologies"
                   :key="tech"
