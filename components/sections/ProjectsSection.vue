@@ -241,6 +241,7 @@ onUnmounted(() => {
           @touchend="handleTouchEnd"
         >
           <div class="relative">
+            <div class="pointer-events-none absolute inset-x-10 top-10 h-64 rounded-full project-orbit-glow opacity-80 blur-3xl" />
             <div class="relative flex min-h-[500px] items-center justify-center overflow-hidden sm:min-h-[560px]">
               <div
                 v-for="(project, index) in filteredProjects"
@@ -249,7 +250,10 @@ onUnmounted(() => {
                 :style="getSlideStyle(index)"
                 @click="index !== currentIndex && goToSlide(index)"
               >
-                <article class="rounded-[28px] border border-slate-100 bg-white shadow-soft overflow-hidden transition-transform hover:-translate-y-1">
+                <article
+                  class="project-card overflow-hidden transition-transform hover:-translate-y-1"
+                  :class="index === currentIndex ? 'project-card-active' : 'bg-white shadow-soft'"
+                >
                   <a
                     :href="getProjectUrl(project)"
                     :target="getProjectUrl(project) !== '#' ? '_blank' : undefined"
@@ -261,6 +265,7 @@ onUnmounted(() => {
                     <div v-if="!hasProjectImage(project)" class="absolute inset-0 bg-[radial-gradient(#e1ebf4_1px,transparent_1px)] [background-size:16px_16px] opacity-40" />
 
                     <div class="relative flex h-full flex-col justify-between">
+                      <span class="project-focus-line" :class="index === currentIndex ? 'opacity-100' : 'opacity-0'" />
                       <div class="flex items-start justify-between gap-4">
                         <div class="space-y-3">
                           <span
@@ -290,7 +295,7 @@ onUnmounted(() => {
                           <h3 class="max-w-[80%] font-display text-4xl tracking-tight text-slate-800 sm:text-5xl">
                             {{ project.title }}
                           </h3>
-                          <span class="font-display text-5xl tracking-tight text-slate-200 sm:text-6xl">
+                          <span class="project-monogram font-display text-5xl tracking-tight text-slate-200 sm:text-6xl">
                             {{ getProjectMonogram(project) }}
                           </span>
                         </div>
@@ -389,7 +394,7 @@ onUnmounted(() => {
           </div>
 
           <div v-if="currentProject" class="space-y-4">
-            <div class="rounded-2xl border border-slate-100 bg-surface-50 p-6 shadow-sm">
+            <div class="surface-card-accent p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Projet actif</p>
               <p class="mt-4 font-display text-3xl tracking-tight text-slate-800">
                 {{ currentProject.title }}
@@ -397,9 +402,24 @@ onUnmounted(() => {
               <p class="mt-4 text-slate-600">
                 {{ currentProject.longDescription || currentProject.description }}
               </p>
+
+              <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                <div class="rounded-xl border border-white/60 bg-white/70 p-4">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Lecture</p>
+                  <p class="mt-2 text-sm text-slate-700">
+                    {{ currentProject.featured ? 'Projet mis en avant' : 'Projet du portfolio' }}
+                  </p>
+                </div>
+                <div class="rounded-xl border border-white/60 bg-white/70 p-4">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-slate-400">Cadence</p>
+                  <p class="mt-2 text-sm text-slate-700">
+                    {{ String(currentIndex + 1).padStart(2, '0') }} / {{ String(filteredProjects.length).padStart(2, '0') }}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <div class="surface-card p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Technologies</p>
               <div class="mt-4 flex flex-wrap gap-2">
                 <span
@@ -412,7 +432,7 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <div class="surface-card-editorial p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Liens</p>
               <div class="mt-4 flex flex-wrap gap-3">
                 <a
@@ -465,3 +485,58 @@ onUnmounted(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.project-card {
+  position: relative;
+  border-radius: 28px;
+  border: 1px solid rgb(var(--line) / 0.1);
+}
+
+.project-card-active {
+  background:
+    linear-gradient(
+      160deg,
+      rgb(var(--surface) / 0.98) 0%,
+      rgb(var(--surface-alt) / 0.92) 62%,
+      rgb(var(--surface-strong) / 0.74) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.16),
+    0 28px 64px rgb(var(--shadow) / 0.16);
+}
+
+.project-card-active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top right, rgb(var(--accent-soft) / 0.16), transparent 24%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.14), transparent 20%);
+}
+
+.project-orbit-glow {
+  background:
+    radial-gradient(circle at center, rgb(var(--accent-soft) / 0.2) 0%, rgb(var(--accent) / 0.08) 42%, transparent 74%);
+}
+
+.project-focus-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgb(var(--accent-strong)), transparent);
+  transition: opacity 0.3s ease;
+}
+
+.project-monogram {
+  position: relative;
+  padding: 0.35rem 0.75rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--line) / 0.12);
+  background: rgb(var(--surface) / 0.54);
+  backdrop-filter: blur(12px);
+}
+</style>

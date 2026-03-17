@@ -29,17 +29,12 @@ const scrollToSection = (selector: string) => {
   >
     <div class="pointer-events-none absolute inset-x-0 top-0 h-[40rem] hero-halo opacity-50" />
 
-    <!-- Japanese decorative elements -->
     <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-      <!-- Ensō circle – top right -->
       <UiDecoEnso :size="280" class="absolute -right-16 -top-10 text-primary-400 opacity-40" />
-      <!-- Seigaiha waves – bottom left -->
-      <UiDecoSeigaiha class="absolute -bottom-2 -left-6 text-primary-500 rotate-3 scale-110" />
-      <!-- Asanoha star – bottom right subtle -->
-      <UiDecoAsanoha :size="100" class="absolute bottom-24 right-12 text-primary-300 opacity-60 animate-spin-slow" />
+      <UiDecoSeigaiha class="absolute -bottom-2 -left-6 rotate-3 scale-110 text-primary-500" />
+      <UiDecoAsanoha :size="100" class="absolute bottom-24 right-12 animate-spin-slow text-primary-300 opacity-60" />
     </div>
 
-    <!-- 3D Canvas Background Area -->
     <div class="absolute inset-0 z-0 flex items-center justify-center opacity-60">
       <div class="hero-halo relative h-[80vh] w-[80vw] max-w-5xl rounded-full opacity-60 blur-3xl" />
       <div class="absolute inset-0">
@@ -57,8 +52,8 @@ const scrollToSection = (selector: string) => {
         class="eyebrow-chip text-primary-700"
       >
         <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500"></span>
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75" />
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-primary-500" />
         </span>
         <span>Disponible pour une alternance</span>
       </div>
@@ -71,7 +66,7 @@ const scrollToSection = (selector: string) => {
         :class="{ 'mix-blend-multiply': !isDark }"
       >
         <span class="block">{{ nameParts.firstName }}</span>
-        <span class="text-primary-600 block my-5">{{ nameParts.lastName }}</span>
+        <span class="my-5 block text-primary-600">{{ nameParts.lastName }}</span>
       </h1>
 
       <p
@@ -97,12 +92,10 @@ const scrollToSection = (selector: string) => {
         </button>
       </div>
 
-      <div class="mt-24 flex items-center justify-center gap-4">
-        <span class="h-px w-12 bg-slate-200" />
-        <span class="font-mono text-[10px] uppercase tracking-[0.36em] text-slate-400">
+      <div class="mt-24 flex items-center justify-center">
+        <span class="section-strand">
           Portfolio 2026
         </span>
-        <span class="h-px w-12 bg-slate-200" />
       </div>
     </div>
   </section>

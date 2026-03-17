@@ -109,7 +109,13 @@ const getSkillSummary = (skill: Skill) => {
               Une base technique solide, mais surtout une recherche constante de coherence entre performance, lisibilite et qualite de finition.
             </p>
 
-            <div class="mt-8 rounded-2xl border border-slate-100 bg-surface-50 p-6 shadow-sm">
+            <div class="mt-6">
+              <span class="section-strand">
+                stack choisie, usage reel, signal clair
+              </span>
+            </div>
+
+            <div class="surface-card-accent mt-8 p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Categorie active</p>
               <p class="mt-4 font-display text-3xl tracking-tight text-slate-800">
                 {{ activeCategoryData.title }}
@@ -123,7 +129,7 @@ const getSkillSummary = (skill: Skill) => {
             </div>
 
             <div class="mt-auto pt-6">
-              <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+              <div class="surface-card p-6">
                 <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Stack privilegiee</p>
                 <div class="mt-4 flex flex-wrap gap-2">
                   <span
@@ -173,7 +179,7 @@ const getSkillSummary = (skill: Skill) => {
                   :class="
                     isPreferredSkill(skill.name)
                       ? 'skill-card-preferred border-primary-200 shadow-soft'
-                      : 'border-slate-100 bg-white shadow-sm hover:shadow-soft'
+                      : 'surface-card hover:shadow-soft'
                   "
                 >
                   <div class="flex items-start justify-between gap-4">

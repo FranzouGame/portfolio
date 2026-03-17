@@ -85,7 +85,7 @@ const getTypeColor = (type: string) => {
             v-motion
             :initial="{ opacity: 0, y: 16 }"
             :visible-once="{ opacity: 1, y: 0, transition: { delay: 180 } }"
-            class="rounded-full border border-slate-200 bg-white shadow-sm inline-flex gap-2 p-2"
+            class="surface-card inline-flex gap-2 p-2"
           >
             <button
               class="rounded-full px-5 py-3 font-mono text-[11px] uppercase tracking-[0.24em] transition-all"
@@ -114,7 +114,7 @@ const getTypeColor = (type: string) => {
 
         <div class="mt-10 grid gap-8 items-start xl:grid-cols-[280px_minmax(0,1fr)]">
           <div class="relative">
-            <div class="sticky top-32 rounded-2xl border border-slate-100 bg-surface-50 p-6 shadow-sm">
+            <div class="surface-card-accent sticky top-32 p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Cap actuel</p>
               <p class="mt-4 font-display text-3xl tracking-tight text-slate-800">
                 {{ activeSummary.title }}
@@ -126,7 +126,7 @@ const getTypeColor = (type: string) => {
           </div>
 
           <div class="relative">
-            <div class="absolute bottom-0 left-0 top-0 w-px bg-slate-200 md:left-1/2 md:-translate-x-1/2" />
+            <div class="timeline-spine absolute bottom-0 left-0 top-0 w-px md:left-1/2 md:-translate-x-1/2" />
 
             <Transition
               enter-active-class="transition-all duration-500"
@@ -148,11 +148,11 @@ const getTypeColor = (type: string) => {
                   :class="index % 2 === 0 ? 'md:pr-[calc(50%+2rem)]' : 'md:pl-[calc(50%+2rem)]'"
                 >
                   <div
-                    class="absolute left-0 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-white bg-primary-500 shadow-sm md:left-1/2"
-                    :class="experience.current ? 'animate-pulse bg-primary-600' : ''"
+                    class="timeline-node absolute left-0 h-4 w-4 -translate-x-1/2 rounded-full md:left-1/2"
+                    :class="experience.current ? 'animate-pulse timeline-node-active' : ''"
                   />
 
-                  <div class="rounded-2xl border border-slate-100 bg-white shadow-sm ml-8 p-6 md:ml-0 transition-transform hover:-translate-y-1 hover:shadow-soft">
+                  <div class="surface-card timeline-card ml-8 p-6 transition-transform hover:-translate-y-1 hover:shadow-soft md:ml-0">
                     <div class="flex flex-wrap items-start justify-between gap-3">
                       <div>
                         <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">
@@ -214,11 +214,11 @@ const getTypeColor = (type: string) => {
                   :class="index % 2 === 0 ? 'md:pr-[calc(50%+2rem)]' : 'md:pl-[calc(50%+2rem)]'"
                 >
                   <div
-                    class="absolute left-0 h-4 w-4 -translate-x-1/2 rounded-full border-4 border-white bg-secondary-500 shadow-sm md:left-1/2"
-                    :class="entry.current ? 'animate-pulse bg-secondary-600' : ''"
+                    class="timeline-node absolute left-0 h-4 w-4 -translate-x-1/2 rounded-full md:left-1/2"
+                    :class="entry.current ? 'animate-pulse timeline-node-active' : ''"
                   />
 
-                  <div class="rounded-2xl border border-slate-100 bg-white shadow-sm ml-8 p-6 md:ml-0 transition-transform hover:-translate-y-1 hover:shadow-soft">
+                  <div class="surface-card timeline-card ml-8 p-6 transition-transform hover:-translate-y-1 hover:shadow-soft md:ml-0">
                     <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">
                       {{ formatDate(entry.startDate) }} - {{ entry.current ? 'Aujourd’hui' : formatDate(entry.endDate!) }}
                     </p>
@@ -254,3 +254,40 @@ const getTypeColor = (type: string) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.timeline-spine {
+  background:
+    linear-gradient(180deg, transparent 0%, rgb(var(--accent) / 0.34) 12%, rgb(var(--line) / 0.2) 52%, transparent 100%);
+}
+
+.timeline-node {
+  border: 4px solid rgb(var(--surface) / 0.96);
+  background:
+    radial-gradient(circle at 35% 35%, rgb(255 255 255 / 0.9), transparent 36%),
+    linear-gradient(180deg, rgb(var(--surface-strong) / 0.9), rgb(var(--accent)) 100%);
+  box-shadow:
+    0 0 0 6px rgb(var(--accent) / 0.08),
+    0 10px 26px rgb(var(--shadow) / 0.14);
+}
+
+.timeline-node-active {
+  box-shadow:
+    0 0 0 8px rgb(var(--accent) / 0.12),
+    0 12px 28px rgb(var(--shadow) / 0.18);
+}
+
+.timeline-card {
+  position: relative;
+}
+
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgb(var(--accent-strong)) 0%, rgb(var(--accent)) 100%);
+  opacity: 0.6;
+}
+</style>

@@ -96,6 +96,12 @@ const engagement = {
               }}
             </p>
 
+            <div class="mt-6">
+              <span class="section-strand">
+                Frontend soigne, systeme lisible, execution durable
+              </span>
+            </div>
+
             <div class="mt-10 grid gap-4 sm:grid-cols-2">
               <div
                 v-for="(item, index) in highlights"
@@ -103,7 +109,7 @@ const engagement = {
                 v-motion
                 :initial="{ opacity: 0, y: 16 }"
                 :visible-once="{ opacity: 1, y: 0, transition: { delay: 280 + index * 80 } }"
-                class="rounded-2xl border border-slate-100 bg-white p-5 sm:p-6 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-soft"
+                class="surface-card p-5 transition-transform hover:-translate-y-1 hover:shadow-soft sm:p-6"
               >
                 <div class="flex items-center justify-between gap-3">
                   <span class="font-mono text-[11px] uppercase tracking-[0.28em] text-primary-500">
@@ -144,7 +150,7 @@ const engagement = {
             v-motion
             :initial="{ opacity: 0, x: 24 }"
             :visible-once="{ opacity: 1, x: 0, transition: { delay: 200 } }"
-            class="flex h-full flex-col rounded-[28px] border border-slate-100 bg-white p-6 sm:p-8 shadow-soft"
+            class="surface-card-editorial flex h-full flex-col rounded-[28px] p-6 sm:p-8 shadow-soft"
           >
             <div class="flex items-start justify-between gap-4">
               <div class="max-w-sm">
@@ -160,7 +166,7 @@ const engagement = {
               <div
                 v-for="principle in principles"
                 :key="principle.label"
-                class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm"
+                class="surface-card p-5"
               >
                 <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">{{ principle.label }}</p>
                 <p class="mt-3 text-slate-600">
@@ -180,7 +186,7 @@ const engagement = {
                 </p>
               </div>
 
-              <div class="rounded-xl border border-slate-100 bg-surface-50 p-5 shadow-sm">
+              <div class="surface-card-accent p-5">
                 <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Base</p>
                 <p class="mt-3 font-display text-3xl tracking-tight text-slate-800">
                   {{ profile?.location || 'Anglet - 64' }}

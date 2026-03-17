@@ -143,9 +143,15 @@ const socialLinks = computed(() => {
               >
                 Une opportunité, un projet ou simplement l’envie d’échanger autour du web et de l’interface ? Je suis disponible pour en discuter.
               </p>
+
+              <div class="mt-6">
+                <span class="section-strand">
+                  opportunites claires, rythme simple, reponse rapide
+                </span>
+              </div>
             </div>
 
-            <div class="rounded-2xl border border-slate-100 bg-surface-50 p-6 shadow-sm">
+            <div class="surface-card-accent p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Disponibilité</p>
               <p class="mt-4 font-display text-3xl tracking-tight text-slate-800">
                 Alternance et projets motivants.
@@ -160,7 +166,7 @@ const socialLinks = computed(() => {
                 v-for="method in contactMethods"
                 :key="method.label"
                 :href="method.href || undefined"
-                class="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-soft flex items-center gap-4"
+                class="surface-card flex items-center gap-4 p-5 transition-transform hover:-translate-y-1 hover:shadow-soft"
                 :class="method.href ? 'cursor-pointer' : 'cursor-default'"
               >
                 <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary-100 bg-primary-50">
@@ -203,7 +209,7 @@ const socialLinks = computed(() => {
               </a>
             </div>
 
-            <div class="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+            <div class="surface-card-editorial p-6">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Réseaux</p>
               <div class="mt-5 flex flex-wrap gap-3">
                 <a
@@ -235,7 +241,7 @@ const socialLinks = computed(() => {
             :visible-once="{ opacity: 1, x: 0, transition: { delay: 260 } }"
             class="h-full"
           >
-            <form class="flex flex-col h-full rounded-[28px] border border-slate-100 bg-white p-6 sm:p-8 shadow-soft" @submit.prevent="handleSubmit">
+            <form class="surface-card-editorial flex h-full flex-col rounded-[28px] p-6 sm:p-8 shadow-soft" @submit.prevent="handleSubmit">
               <div class="mb-8 flex items-start justify-between gap-6">
                 <div>
                   <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">Message</p>
