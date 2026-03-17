@@ -71,7 +71,7 @@ const scrollToSection = (selector: string) => {
         :class="{ 'mix-blend-multiply': !isDark }"
       >
         <span class="block">{{ nameParts.firstName }}</span>
-        <span class="text-primary-600 block">{{ nameParts.lastName }}</span>
+        <span class="text-primary-600 block my-5">{{ nameParts.lastName }}</span>
       </h1>
 
       <p

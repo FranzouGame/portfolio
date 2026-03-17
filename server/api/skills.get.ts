@@ -6,6 +6,12 @@ export default defineEventHandler(async (event) => {
 
   const skills = await prisma.skill.findMany({
     where: category ? { category } : undefined,
+    select: {
+      id: true,
+      name: true,
+      category: true,
+      order: true,
+    },
     orderBy: { order: 'asc' },
   })
   

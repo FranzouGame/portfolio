@@ -33,7 +33,6 @@ model Profile {
 model Skill {
   id          Int      @id @default(autoincrement())
   name        String
-  percentage  Int      // 0-100
   category    String   // "frontend", "backend", "tools", "soft"
   icon        String?  // Nom de l'icône ou URL
   order       Int      @default(0)

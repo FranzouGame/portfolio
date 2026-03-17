@@ -14,7 +14,6 @@ export interface ProfileData {
 export interface SkillData {
   id: number
   name: string
-  percentage: number
   category: string
 }
 
