@@ -265,6 +265,7 @@ const getSkillSummary = (skill: Skill) => {
 
 .skill-card-preferred {
   position: relative;
+  overflow: hidden;
   background:
     linear-gradient(
       145deg,
