@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import SkillGlyph from '~/components/ui/SkillGlyph.vue'
+
 interface Skill {
   id: number
   name: string
@@ -53,6 +55,9 @@ const activeCategoryData = computed(() => {
 })
 
 const isPreferredSkill = (name: string) => preferredStack.includes(name)
+const activePreferredSkills = computed(() => {
+  return filteredSkills.value.filter(skill => isPreferredSkill(skill.name)).slice(0, 4)
+})
 
 const getSkillSummary = (skill: Skill) => {
   if (skill.category === 'soft') {
@@ -123,6 +128,16 @@ const getSkillSummary = (skill: Skill) => {
               <p class="mt-4 text-slate-600">
                 {{ activeCategoryData.description }}
               </p>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <div
+                  v-for="skill in activePreferredSkills"
+                  :key="skill.id"
+                  class="skill-preview-chip"
+                >
+                  <SkillGlyph :name="skill.name" :category="skill.category" size="sm" />
+                  <span class="text-sm text-slate-700">{{ skill.name }}</span>
+                </div>
+              </div>
               <p class="mt-4 border-t border-slate-200/80 pt-4 text-sm leading-relaxed text-slate-500">
                 Pas de jauges arbitraires ici : je prefere montrer les outils que j utilise, ceux que je privilegie et le contexte dans lequel ils m aident a livrer proprement.
               </p>
@@ -135,8 +150,9 @@ const getSkillSummary = (skill: Skill) => {
                   <span
                     v-for="tech in preferredStack"
                     :key="tech"
-                    class="inline-flex rounded-full border border-slate-200 bg-surface-100 px-3 py-1.5 text-sm text-slate-600 shadow-sm transition-colors hover:bg-white hover:text-slate-900"
+                    class="skill-stack-chip"
                   >
+                    <SkillGlyph :name="tech" size="sm" />
                     {{ tech }}
                   </span>
                 </div>
@@ -183,11 +199,17 @@ const getSkillSummary = (skill: Skill) => {
                   "
                 >
                   <div class="flex items-start justify-between gap-4">
-                    <div>
-                      <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">{{ activeCategoryData.label }}</p>
-                      <h3 class="mt-2 font-display text-2xl tracking-tight text-slate-800">
-                        {{ skill.name }}
-                      </h3>
+                    <div class="flex items-start gap-4">
+                      <div class="skill-glyph-shell">
+                        <SkillGlyph :name="skill.name" :category="skill.category" />
+                      </div>
+
+                      <div>
+                        <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-primary-500">{{ activeCategoryData.label }}</p>
+                        <h3 class="mt-2 font-display text-2xl tracking-tight text-slate-800">
+                          {{ skill.name }}
+                        </h3>
+                      </div>
                     </div>
 
                     <span
@@ -197,6 +219,8 @@ const getSkillSummary = (skill: Skill) => {
                       Focus
                     </span>
                   </div>
+
+                  <div class="mt-5 h-px w-full bg-gradient-to-r from-primary-200/60 via-slate-200/60 to-transparent" />
 
                   <p class="mt-5 text-sm leading-relaxed text-slate-600">
                     {{ getSkillSummary(skill) }}
@@ -240,6 +264,7 @@ const getSkillSummary = (skill: Skill) => {
 }
 
 .skill-card-preferred {
+  position: relative;
   background:
     linear-gradient(
       145deg,
@@ -247,6 +272,31 @@ const getSkillSummary = (skill: Skill) => {
       rgb(var(--surface-alt) / 0.96) 34%,
       rgb(var(--surface) / 0.94) 100%
     );
+}
+
+.skill-card-preferred::after {
+  content: "";
+  position: absolute;
+  inset: auto -12% -18% auto;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgb(var(--accent-soft) / 0.28) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.skill-glyph-shell {
+  position: relative;
+}
+
+.skill-glyph-shell::after {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgb(var(--accent) / 0.16) 0%, transparent 72%);
+  filter: blur(12px);
+  z-index: -1;
 }
 
 .skill-focus-chip {
@@ -259,5 +309,33 @@ const getSkillSummary = (skill: Skill) => {
 
 .skill-preferred-chip {
   background-color: rgb(var(--accent) / 0.16);
+}
+
+.skill-stack-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--line) / 0.16);
+  background: linear-gradient(180deg, rgb(var(--surface-strong) / 0.86), rgb(var(--surface) / 0.82));
+  padding: 0.45rem 0.85rem 0.45rem 0.45rem;
+  font-size: 0.95rem;
+  color: rgb(var(--text-secondary));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.14),
+    0 10px 22px rgb(var(--shadow) / 0.1);
+}
+
+.skill-preview-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--line) / 0.14);
+  background: rgb(var(--surface) / 0.72);
+  padding: 0.35rem 0.9rem 0.35rem 0.35rem;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    0 12px 24px rgb(var(--shadow) / 0.08);
 }
 </style>
